@@ -1,55 +1,71 @@
 ## Lee Kung
 
-I build small Python services that pull public data and return it as rows, and I publish them so
-other people can use them. Information Systems student at Ohio State, CS minor — most of what's
-here is self-taught, and I learn by shipping something and then finding out how it breaks.
+Information Systems student at Ohio State (CS minor). I build systems I actually run — a personal
+operating system, two live commerce ventures, and the tooling that keeps them going.
 
-### [apify-data-actors](https://github.com/leekung125/apify-data-actors)
+Most of what's here started as a problem I had, not as a tutorial. Some of it is further along than
+the rest, and I'd rather it be readable than pretend to be finished.
 
-Source for six scrapers I publish on the [Apify Store](https://apify.com/leekung125): YouTube
-transcripts, whole-channel transcripts, YouTube search with ranking, Google Trends, Google Play
-reviews and App Store reviews.
+---
 
-**None of them run a headless browser**, and that's the interesting part. Apify publishes 30-day run
-stats for every public Actor. The biggest competing Google Trends scraper reads:
+### ⭐ [Ascension](https://github.com/leekung125/ascension) — a personal operating system
 
-```
-22,102 runs    62.4% succeeded
-               24.4% TIMED OUT     <- the largest single failure bucket
-               10.4% aborted
-                2.7% failed
-```
+Habits with a rank that can *regress*, finances, journal, live business metrics, and a
+force-directed dependency graph of its own codebase. Around 20 route groups in one Next.js app with
+a visual language that's enforced rather than suggested.
 
-Nearly a quarter of its runs die waiting on a browser. If you talk to the JSON endpoints the sites
-already serve, that failure mode doesn't exist for you. It's also cheap enough to charge per row
-instead of per run — so a call that returns nothing is free.
+Themed on the Nightmare Spell from *Shadow Slave*, and the theme is load-bearing: a progress bar is
+easy to ignore, but a rank that can fall and a codex that counts the days you didn't write are
+harder to.
 
-A few other things I settled on that I'd defend:
+`Next.js 16 · React 19 · TypeScript · Tailwind 4 · Neon Postgres`
 
-- **Failures are rows, not exceptions.** A blocked or caption-less video comes back in the dataset
-  with a `status`, so a caller can tell "nothing there" apart from "something broke."
-- **A missing field is not a failed filter.** YouTube omits view counts and durations plenty. If you
-  set `minViews` and the value is unknown, the row is kept — silently dropping most of a result set
-  is worse than a blank column.
-- Search results carry **the rank each video held for that query**, which most tools throw away and
-  is the only field that matters if you're tracking visibility.
+---
 
-### [web-data-toolkit-mcp](https://github.com/leekung125/web-data-toolkit-mcp)
+### [BlackBox Supplies](https://github.com/leekung125/blackbox-supplies) — live gear site
 
-The same data behind one hosted endpoint, registered in the **Model Context Protocol registry** so
-Claude, Cursor and other MCP clients can call it as a tool. Nothing to install — point a client at
-one URL. Live at [web-data-toolkit.vercel.app](https://web-data-toolkit.vercel.app).
+[blackboxsupplies.com](https://blackboxsupplies.com) — utility and readiness gear, routed by
+**failure scenario** instead of product category. Dead battery, flat tire, outage, heatwave: start
+from the broken thing, decide in two minutes.
 
-### Elsewhere
+Comparison logic is one typed module per product class, because a power station is judged on
+watt-hours and surge and a tire inflator isn't — a single generic spec table is how gear sites end
+up useless. Content freshness is tracked per page, and the homepage counter reads **0 paid
+placements**, which is the actual editorial rule.
 
-A live affiliate-commerce site, and a fair number of desktop builds and repairs — hardware, BIOS,
-Windows and Ubuntu, and the boot failures and driver conflicts that come with them.
+`Next.js App Router · TypeScript · Tailwind`
+
+---
+
+### Maison Noctaura — live jewellery store
+
+[maisonnoctaura.com](https://www.maisonnoctaura.com) — a moissanite jewellery store I run, from
+product photography and copy through to the publishing pipeline that schedules content across
+channels.
+
+The source stays private: the engine is interwoven with supplier costs and margins, and there's no
+version of publishing it that doesn't hand a competitor the cost structure.
+
+---
+
+### Data tooling
+
+[**apify-data-actors**](https://github.com/leekung125/apify-data-actors) — six Python scrapers
+published on the [Apify Store](https://apify.com/leekung125). None run a headless browser, which is
+the point: the largest competing scraper in one of these niches loses **24.4% of 22,102 runs to
+timeouts**, and a process without a browser can't fail that way.
+
+[**web-data-toolkit-mcp**](https://github.com/leekung125/web-data-toolkit-mcp) — the same data
+behind one hosted endpoint, in the Model Context Protocol registry so MCP clients can call it as a
+tool. [web-data-toolkit.vercel.app](https://web-data-toolkit.vercel.app)
+
+---
 
 ### How these get built
 
 I use AI coding tools heavily, Claude Code mainly, and I'd rather say so than have anyone infer it.
-I'm not claiming I hand-wrote every line. What I decide is which problems are worth solving, how
-the thing should behave when a data source misbehaves, and what it should cost — and I can talk
-through any of those.
+I'm a student and still early — I'm not claiming I hand-wrote every line. What I decide is what
+each thing should be, how it behaves when something upstream breaks, and which of my own ideas to
+throw out. Happy to talk through any of it.
 
-**Python · C++ · JavaScript / TypeScript · SQL · HTML / CSS · Docker · Git · Linux**
+`Python · C++ · TypeScript / JavaScript · SQL · HTML / CSS · Git · Docker · Linux`
