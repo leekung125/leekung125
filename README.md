@@ -37,14 +37,19 @@ placements**, which is the actual editorial rule.
 
 ---
 
-### Maison Noctaura — live jewellery store
+### [Maison Noctaura](https://github.com/leekung125/noctaura-publishing-engine) — live jewellery store
 
 [maisonnoctaura.com](https://www.maisonnoctaura.com) — a moissanite jewellery store I run, from
-product photography and copy through to the publishing pipeline that schedules content across
-channels.
+product photography and copy through to the pipeline that schedules content across four channels.
 
-The source stays private: the engine is interwoven with supplier costs and margins, and there's no
-version of publishing it that doesn't hand a competitor the cost structure.
+The published modules are the interesting ones: content attribution encoded into `utm_content` so a
+single string survives the round trip into Shopify's session analytics and tells you which creative
+idea brought someone in, platform limits that were measured rather than read off a docs page, and a
+Buffer client built around the fact that an accepted handoff is not a published post.
+
+The orchestrator, claim guard and settings layer are withheld — they carry supplier identity and
+unit costs, and there's no version of publishing those that doesn't hand a competitor the cost
+structure.
 
 ---
 
