@@ -1,34 +1,55 @@
 ## Lee Kung
 
-Information Systems student at Ohio State (CS minor), based in Columbus, OH. Studying for the
-Cisco CCNA. Looking for IT support / help desk / junior systems work.
+I build small Python services that pull public data and return it as rows, and I publish them so
+other people can use them. Information Systems student at Ohio State, CS minor — most of what's
+here is self-taught, and I learn by shipping something and then finding out how it breaks.
 
-I'm still early in this — most of what I know outside class is self-taught, and I learn by building
-things and then finding out what breaks. The repos here are the ones I'd actually want someone to
-look at, not everything I've ever touched.
+### [apify-data-actors](https://github.com/leekung125/apify-data-actors)
 
-**Using:** Python · C++ · JavaScript / TypeScript · SQL · HTML / CSS · Git · Windows & Ubuntu ·
-TCP/IP, DNS, DHCP
+Source for six scrapers I publish on the [Apify Store](https://apify.com/leekung125): YouTube
+transcripts, whole-channel transcripts, YouTube search with ranking, Google Trends, Google Play
+reviews and App Store reviews.
 
-### Repos worth looking at
+**None of them run a headless browser**, and that's the interesting part. Apify publishes 30-day run
+stats for every public Actor. The biggest competing Google Trends scraper reads:
 
-**[apify-data-actors](https://github.com/leekung125/apify-data-actors)** — source for six small
-Python services I publish on the [Apify Store](https://apify.com/leekung125). They pull public data
-(YouTube transcripts, YouTube search, Google Trends, Google Play and App Store reviews) and return
-it as rows. None of them run a headless browser, which was a deliberate call — the competing tools
-mostly fail by timing out, and a process without a browser in it can't fail that way.
+```
+22,102 runs    62.4% succeeded
+               24.4% TIMED OUT     <- the largest single failure bucket
+               10.4% aborted
+                2.7% failed
+```
 
-**[web-data-toolkit-mcp](https://github.com/leekung125/web-data-toolkit-mcp)** — the same data
-behind one hosted endpoint, registered in the Model Context Protocol registry so AI assistants can
-call it as a tool. Live at [web-data-toolkit.vercel.app](https://web-data-toolkit.vercel.app).
+Nearly a quarter of its runs die waiting on a browser. If you talk to the JSON endpoints the sites
+already serve, that failure mode doesn't exist for you. It's also cheap enough to charge per row
+instead of per run — so a call that returns nothing is free.
 
-Outside GitHub I also run a live affiliate-commerce site and I've built and repaired a number of
-desktop PCs — hardware, BIOS, Windows and Ubuntu, and the usual boot failures and driver conflicts
-that come with it.
+A few other things I settled on that I'd defend:
 
-### How these were built
+- **Failures are rows, not exceptions.** A blocked or caption-less video comes back in the dataset
+  with a `status`, so a caller can tell "nothing there" apart from "something broke."
+- **A missing field is not a failed filter.** YouTube omits view counts and durations plenty. If you
+  set `minViews` and the value is unknown, the row is kept — silently dropping most of a result set
+  is worse than a blank column.
+- Search results carry **the rank each video held for that query**, which most tools throw away and
+  is the only field that matters if you're tracking visibility.
 
-I lean on AI coding tools, Claude Code mainly, and I'd rather say that up front than have you infer
-it. What I decide is which problems are worth solving, how the thing should behave when the data
-source misbehaves, and what to charge — and I can walk through any of those calls. I'm not going to
-claim I hand-wrote every line.
+### [web-data-toolkit-mcp](https://github.com/leekung125/web-data-toolkit-mcp)
+
+The same data behind one hosted endpoint, registered in the **Model Context Protocol registry** so
+Claude, Cursor and other MCP clients can call it as a tool. Nothing to install — point a client at
+one URL. Live at [web-data-toolkit.vercel.app](https://web-data-toolkit.vercel.app).
+
+### Elsewhere
+
+A live affiliate-commerce site, and a fair number of desktop builds and repairs — hardware, BIOS,
+Windows and Ubuntu, and the boot failures and driver conflicts that come with them.
+
+### How these get built
+
+I use AI coding tools heavily, Claude Code mainly, and I'd rather say so than have anyone infer it.
+I'm not claiming I hand-wrote every line. What I decide is which problems are worth solving, how
+the thing should behave when a data source misbehaves, and what it should cost — and I can talk
+through any of those.
+
+**Python · C++ · JavaScript / TypeScript · SQL · HTML / CSS · Docker · Git · Linux**
