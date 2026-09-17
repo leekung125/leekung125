@@ -1,35 +1,34 @@
 ## Lee Kung
 
-Information Systems student. I build and run small data tools and web services, mostly in Python and TypeScript.
+Information Systems student at Ohio State (CS minor), based in Columbus, OH. Studying for the
+Cisco CCNA. Looking for IT support / help desk / junior systems work.
 
-Most of what I work on is operational rather than academic — things that are deployed, have to keep
-working, and get measured. I'm more interested in whether something survives contact with real
-traffic than in how it looks on a slide.
+I'm still early in this — most of what I know outside class is self-taught, and I learn by building
+things and then finding out what breaks. The repos here are the ones I'd actually want someone to
+look at, not everything I've ever touched.
 
-**Working with:** Python · TypeScript / JavaScript · C++ · SQL · HTML / CSS · Docker · REST APIs · Next.js
+**Using:** Python · C++ · JavaScript / TypeScript · SQL · HTML / CSS · Git · Windows & Ubuntu ·
+TCP/IP, DNS, DHCP
 
-### Things I've published
+### Repos worth looking at
 
-**[Web Data Toolkit](https://web-data-toolkit.vercel.app)** — a hosted REST + MCP service that puts
-four public-data endpoints behind one key: YouTube transcripts (single video or a whole channel),
-Google Trends, and Google Play reviews. Listed in the official Model Context Protocol registry, so
-AI agents can use it as a tool.
-→ [`web-data-toolkit-mcp`](https://github.com/leekung125/web-data-toolkit-mcp)
+**[apify-data-actors](https://github.com/leekung125/apify-data-actors)** — source for six small
+Python services I publish on the [Apify Store](https://apify.com/leekung125). They pull public data
+(YouTube transcripts, YouTube search, Google Trends, Google Play and App Store reviews) and return
+it as rows. None of them run a headless browser, which was a deliberate call — the competing tools
+mostly fail by timing out, and a process without a browser in it can't fail that way.
 
-**Six data-extraction Actors on the [Apify Store](https://apify.com/leekung125)** — pay-per-use
-scrapers for YouTube transcripts, YouTube channel transcripts, YouTube search, Google Trends,
-Google Play reviews and App Store reviews. All HTTP-only with no headless browser, which is a
-deliberate design choice: the dominant failure mode in this category is browser timeouts under load.
-Each one is priced per result actually delivered, so a run that returns nothing is free.
+**[web-data-toolkit-mcp](https://github.com/leekung125/web-data-toolkit-mcp)** — the same data
+behind one hosted endpoint, registered in the Model Context Protocol registry so AI assistants can
+call it as a tool. Live at [web-data-toolkit.vercel.app](https://web-data-toolkit.vercel.app).
 
-### How I work
+Outside GitHub I also run a live affiliate-commerce site and I've built and repaired a number of
+desktop PCs — hardware, BIOS, Windows and Ubuntu, and the usual boot failures and driver conflicts
+that come with it.
 
-I use AI coding tools heavily — Claude Code in particular — to design, build and operate these
-systems. I'd rather be straightforward about that than pretend otherwise: the interesting part of
-the work is the architecture, the failure modes, the pricing and the measurement, and that's the
-part I own. If you want to talk about any of it, I can walk you through why a decision was made.
+### How these were built
 
-### Currently
-
-Learning networking fundamentals, and working on making the data tools reliable enough that someone
-would pay for them a second time.
+I lean on AI coding tools, Claude Code mainly, and I'd rather say that up front than have you infer
+it. What I decide is which problems are worth solving, how the thing should behave when the data
+source misbehaves, and what to charge — and I can walk through any of those calls. I'm not going to
+claim I hand-wrote every line.
